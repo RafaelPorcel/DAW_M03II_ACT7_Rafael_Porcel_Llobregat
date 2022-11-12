@@ -41,7 +41,7 @@ public class Musico {
         if(rpl_tiempoFormacion < 1 || rpl_tiempoFormacion > 110){//si pasa esto se lanza el error de abajo
             throw new TiempoFormacionIncorrecta("El tiempo de formación debe ser entre 1 y 110");
         }
-            this.rpl_tiempoFormacion = rpl_tiempoFormacion;
+            this.rpl_tiempoFormacion = rpl_tiempoFormacion;//aqui tendríamos el timpoFormación para usarlo en el constructor
     }
 
     public String getRpl_dni() {//getter dni
@@ -51,7 +51,7 @@ public class Musico {
     //setter dni, se lanza la excepcion DniIncorrecto
     public void setRpl_dni(String rpl_dni) throws DniIncorrecto {
         if(rpl_dni.length() != 9) {
-            throw new DniIncorrecto("El DNI ha de ser un string de 9 valores");
+            throw new DniIncorrecto("El DNI tiene que ser un string de 9 valores");
         }
         this.rpl_dni = rpl_dni;
     }
