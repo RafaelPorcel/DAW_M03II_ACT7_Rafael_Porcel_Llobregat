@@ -1,25 +1,30 @@
 package actividad07;
 
-
-//IMPORT DEL PAQUETE EXCEPTIONS DONDE HE CREADO LAS 4 EXCEPCIONES
+//IMPORT DEL PAQUETE EXCEPTIONS DONDE HE CREADO LAS 5 EXCEPCIONES PROPIAS QUE HEREDAN DE LA CLASE Exception
 import actividad07.exceptions.*;
 
 //IMPORTS DEL PAQUETE java.util para poder usar ArrayList, HashMap, Iterator, Scanner
 import java.util.*;
 
+//import static actividad07.functions.Funciones.*;
+
+
 /** PUNTO 5 - CLASE GestionaMusicos **/
 public class GestionaMusicos {//
 
     /** HashMap con índice String y valor Musico (clase con diferentes atributos). PUNTO 5.a **/
-    static HashMap<String, Musico> rpl_musicos = new HashMap<String, Musico>();
+    static HashMap<String, Musico> rpl_musicos = new HashMap<String, Musico>();//indice: String - valor: Musico
+    //se define el HashMap y se inicializa
 
     /** ArrayList de Músicos de la clase Músico - PUNTO 5.b **/
-    static ArrayList<Musico> rpl_grupoMusica = new ArrayList<Musico>();
+    static ArrayList<Musico> rpl_grupoMusica = new ArrayList<Musico>();//tipo de dato: Musico
 
-    //método main
-    public static void main(String[] args) throws TiempoFormacionIncorrecta, DniIncorrecto, SeudonimoIncorrecto, PosicionIncorrecta {
 
-        /** crear 2 objetos de la clase Musico **/
+
+    //método main con las intrucciones throws de las excepciones
+    public static void main(String[] args) throws TiempoFormacionIncorrecta, DniIncorrecto, SeudonimoIncorrecto{
+
+        /** crear 2 objetos de la clase Musico  **/
         Musico rpl_musico1 = new Musico("Rafa", 19, "12345678R");//creo un musico con sus atributos
         Musico rpl_musico2 = new Musico("Mozart", 13, "45678912D");
 
@@ -30,7 +35,6 @@ public class GestionaMusicos {//
 
 
         int rpl_option = 0; //variable para guardar la opcion a elegir
-        //boolean rpl_salir = false;
         do { //haz esto "bucle do-while"
             rpl_menu(); //llamada a la funcion para que imprima el menú
             rpl_option = rpl_pideEntero(); //llamada a la funcion para pedir un numero entero para utilzarlo en el switch case
@@ -76,6 +80,9 @@ public class GestionaMusicos {//
     }
 
 
+
+    /**************************************** FUNCIONES ****************************************/
+
     //funcion para mostrar opciones de menú
     public static void rpl_menu() {
         System.out.println("\n***** OPCIONES *****" +
@@ -94,7 +101,7 @@ public class GestionaMusicos {//
             return rpl_entero.nextInt();
         } catch (Exception i) {//si no, captura esta excepcion y retorna de nuevo a la función pideEntero (recursiva)
             System.out.println("Introduce un número");
-            return rpl_pideEntero();
+            return rpl_pideEntero();//recursivamente te devuelve a esta funcion
         }
     }
 
@@ -108,54 +115,34 @@ public class GestionaMusicos {//
         }
     }
 
-    public static void crearMusico() throws TiempoFormacionIncorrecta, DniIncorrecto, SeudonimoIncorrecto { //throws TiempoFormacionIncorrecta, DniIncorrecto, SeudonimoIncorrecto {
+    //funcion para crear el musico, pide primero dni luego seudonimo y tiempo formacion
+    public static void crearMusico() throws TiempoFormacionIncorrecta, DniIncorrecto, SeudonimoIncorrecto {
         String rpl_dni = pideDni();
         String rpl_seudonimo = pideSeudonimo();
         int rpl_tiempo_form = pideTiempoFormacion();
 
-       // Musico m1 = capturaErrorOCreaMusico(rpl_seudonimo,rpl_tiempo_form, rpl_dni );//intento crear musico, si algun dato es incorrecto se captura la excepcion y lo vuelve a pedir
         Musico m1 = new Musico (rpl_seudonimo, rpl_tiempo_form, rpl_dni);
 
         rpl_musicos.put(m1.getRpl_dni(), m1);
     }
 
-    public static Musico capturaErrorOCreaMusico(String rpl_seudonimo, int rpl_tiempo_form, String rpl_dni) {
-        try {
-            Musico m1 = new Musico(rpl_seudonimo, rpl_tiempo_form, rpl_dni);
-            return m1;
-        } catch (TiempoFormacionIncorrecta e) {
-            System.out.println("Vuelve a escribir el tiempo de formacion, entre 1 y 110");
-            int rpl_tiempoFormacionCorrecto = pideTiempoFormacion();
-            return capturaErrorOCreaMusico(rpl_seudonimo, rpl_tiempoFormacionCorrecto, rpl_dni);
-
-        } catch (DniIncorrecto e) {
-            System.out.println("Vuelve a escribir el dni, tiene que ser string de 9 valores");
-            String rpl_dniCorrecto = pideDni();
-            return  capturaErrorOCreaMusico(rpl_seudonimo, rpl_tiempo_form, rpl_dniCorrecto);
-
-        } catch (SeudonimoIncorrecto e) {
-            System.out.println("Vuelve a escribir el seudonimo, mínimo 3 letras sin dígitos");
-            String rpl_seudonimoCorrecto = pideSeudonimo();
-            return capturaErrorOCreaMusico(rpl_seudonimoCorrecto, rpl_tiempo_form, rpl_dni);
-        }
-    }
 
     //**** FUNCIONES PARA PEDIR ATRIBUTOS ****
-    public static String pideDni() {
+    public static String pideDni() {//devuelve el dni
         System.out.println("Añade dni del musico");
         Scanner sc = new Scanner(System.in);
         String rpl_dni = sc.nextLine();
         return rpl_dni;
     }
 
-    public static String pideSeudonimo() {
+    public static String pideSeudonimo() {//devuelve el seudonimo
         System.out.println("Añade seudonimo del musico");
         Scanner sc = new Scanner(System.in);
         String rpl_seudonimo = sc.nextLine();
         return rpl_seudonimo;
     }
 
-    public static int pideTiempoFormacion() {
+    public static int pideTiempoFormacion() {//devuelve el tiempo de formacion
         System.out.println("Añade tiempo formacion del musico");
         Scanner sc = new Scanner(System.in);
         int rpl_tiempo_form = sc.nextInt();
@@ -205,7 +192,6 @@ public class GestionaMusicos {//
             }
         }
     }
-
 
 
 }
