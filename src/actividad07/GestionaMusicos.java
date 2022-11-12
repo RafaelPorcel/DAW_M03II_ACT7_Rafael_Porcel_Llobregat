@@ -25,7 +25,7 @@ public class GestionaMusicos {//
     public static void main(String[] args) throws TiempoFormacionIncorrecta, DniIncorrecto, SeudonimoIncorrecto{
 
         /** crear 2 objetos de la clase Musico  **/
-        Musico rpl_musico1 = new Musico("Rafa", 19, "12345678R");//creo un musico con sus atributos
+        Musico rpl_musico1 = new Musico("Rafa", 19, "123445678");//creo un musico con sus atributos
         Musico rpl_musico2 = new Musico("Mozart", 13, "45678912D");
 
 
@@ -40,15 +40,15 @@ public class GestionaMusicos {//
             rpl_option = rpl_pideEntero(); //llamada a la funcion para pedir un numero entero para utilzarlo en el switch case
             switch (rpl_option) {
                 case 1:
-//                    try{crearMusico();//llamada a la funcion para crear musicO
-//                    }catch (DniIncorrecto e){
-//                        System.out.println("Dni incorrecto");
-//                    }catch (SeudonimoIncorrecto e) {
-//                        System.out.println("Seudonimo incorrecto");
-//                    }catch (TiempoFormacionIncorrecta e) {
-//                        System.out.println("Tiempo formación incorrecto");
-//                    }
-                    crearMusico();
+                    try{crearMusico();//llamada a la funcion para crear musicO
+                    }catch (DniIncorrecto e){
+                        System.out.println("Dni incorrecto");
+                    }catch (SeudonimoIncorrecto e) {
+                        System.out.println("Seudonimo incorrecto");
+                    }catch (TiempoFormacionIncorrecta e) {
+                        System.out.println("Tiempo formación incorrecto");
+                    }
+                    //crearMusico();
                     mostrarHashMap();//llamada a la función para mostrar el hashmap con los musicos
                     mostrarGupoMusica();//llamada a la funcion que muestra el ArrayList
                     break;
@@ -195,10 +195,10 @@ public class GestionaMusicos {//
         Scanner sc = new Scanner(System.in);
         int rpl_num_musico = sc.nextInt();
         for (int i = 0; i < rpl_grupoMusica.size(); i++) {
-            if (rpl_num_musico != (i + 1)) {
+            if (rpl_num_musico < 1 | rpl_num_musico > 2 ){
                 throw new PosicionIncorrecta();
             } else {
-                rpl_grupoMusica.remove(rpl_num_musico - 1);
+                rpl_grupoMusica.remove((rpl_num_musico - 1));
             }
         }
     }
