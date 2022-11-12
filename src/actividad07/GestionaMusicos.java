@@ -40,7 +40,15 @@ public class GestionaMusicos {//
             rpl_option = rpl_pideEntero(); //llamada a la funcion para pedir un numero entero para utilzarlo en el switch case
             switch (rpl_option) {
                 case 1:
-                    crearMusico();//llamada a la funcion para crear musicO
+//                    try{crearMusico();//llamada a la funcion para crear musicO
+//                    }catch (DniIncorrecto e){
+//                        System.out.println("Dni incorrecto");
+//                    }catch (SeudonimoIncorrecto e) {
+//                        System.out.println("Seudonimo incorrecto");
+//                    }catch (TiempoFormacionIncorrecta e) {
+//                        System.out.println("Tiempo formación incorrecto");
+//                    }
+                    crearMusico();
                     mostrarHashMap();//llamada a la función para mostrar el hashmap con los musicos
                     mostrarGupoMusica();//llamada a la funcion que muestra el ArrayList
                     break;
@@ -159,7 +167,7 @@ public class GestionaMusicos {//
         rpl_musicos.remove(rpl_dni);
     }
 
-    public static void addMusico() throws DemasiadosObjetos {
+    public static void addMusico() throws DemasiadosObjetos {//para añadir musico al ArrayList
         System.out.println("¿Qué músico quieres añadir al rpl_grupoMusica? Introduce dni");
         mostrarHashMap();
         Scanner sc = new Scanner(System.in);
