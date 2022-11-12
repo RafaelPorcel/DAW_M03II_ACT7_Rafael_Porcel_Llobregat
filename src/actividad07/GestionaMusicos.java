@@ -18,7 +18,7 @@ public class GestionaMusicos {//
 
     /** ArrayList de Músicos de la clase Músico - PUNTO 5.b **/
     static ArrayList<Musico> rpl_grupoMusica = new ArrayList<Musico>();//tipo de dato: Musico
-
+    //se define Array y se inicializa
 
 
     //método main con las intrucciones throws de las excepciones
@@ -30,7 +30,7 @@ public class GestionaMusicos {//
 
 
         /** añado al HashMap dos musico "rpl_musicoX" creados anteriormente y sus claves son el dni que lo cojo con el getRpl_dni de la clase musico **/
-        rpl_musicos.put(rpl_musico1.getRpl_dni(), rpl_musico1);
+        rpl_musicos.put(rpl_musico1.getRpl_dni(), rpl_musico1);//mediante metodo .put añadimos el objeto Músico al HashMap
         rpl_musicos.put(rpl_musico2.getRpl_dni(), rpl_musico2);
 
 
@@ -40,7 +40,7 @@ public class GestionaMusicos {//
             rpl_option = rpl_pideEntero(); //llamada a la funcion para pedir un numero entero para utilzarlo en el switch case
             switch (rpl_option) {
                 case 1:
-                    crearMusico(); //llamada a la funcion para crear musico
+                    crearMusico();//llamada a la funcion para crear musicO
                     mostrarHashMap();//llamada a la función para mostrar el hashmap con los musicos
                     mostrarGupoMusica();//llamada a la funcion que muestra el ArrayList
                     break;
@@ -52,7 +52,6 @@ public class GestionaMusicos {//
                 case 3:
                     try {//probamos a llamar la funcion addMusico que tiene un if y se lanza un error
                         addMusico();
-
                     }catch (DemasiadosObjetos e){//captura el error que se lanza en la funcion y escribe el mensaje
                         System.out.println("El ArrayList no puede contener más de 2 músicos");
                     }
@@ -117,17 +116,20 @@ public class GestionaMusicos {//
 
     //funcion para crear el musico, pide primero dni luego seudonimo y tiempo formacion
     public static void crearMusico() throws TiempoFormacionIncorrecta, DniIncorrecto, SeudonimoIncorrecto {
+        //se lanzan estas 3 funciones y cada una nos devuelve el dato y lo guarda en la variable para luego crear Musico
         String rpl_dni = pideDni();
         String rpl_seudonimo = pideSeudonimo();
-        int rpl_tiempo_form = pideTiempoFormacion();
+        int rpl_tiempoFormacion = pideTiempoFormacion();
 
-        Musico m1 = new Musico (rpl_seudonimo, rpl_tiempo_form, rpl_dni);
+        //aquí usamos los datos que devuelven las funciones, guardados en variables para usarlos en el constructor
+        Musico m1 = new Musico (rpl_seudonimo, rpl_tiempoFormacion, rpl_dni);
 
-        rpl_musicos.put(m1.getRpl_dni(), m1);
+        rpl_musicos.put(m1.getRpl_dni(), m1);//añade al HashMap el musico creado antes con indice dni y con valor Musico
     }
 
 
-    //**** FUNCIONES PARA PEDIR ATRIBUTOS ****
+                        /**** FUNCIONES PARA PEDIR ATRIBUTOS ****/
+
     public static String pideDni() {//devuelve el dni
         System.out.println("Añade dni del musico");
         Scanner sc = new Scanner(System.in);
@@ -149,7 +151,6 @@ public class GestionaMusicos {//
         return rpl_tiempo_form;
     }
 
-
     public static void borraMusico() { //FUNCION PARA BORRAR MUSICO DEL HASHMAP
         System.out.println("¿Qué músico quieres borrar? Introduce el dni");
         mostrarHashMap();
@@ -169,6 +170,7 @@ public class GestionaMusicos {//
             rpl_grupoMusica.add(rpl_musicos.get(rpl_dni));
         }
     }
+
     public static void mostrarGupoMusica() {//funcion para mostrar el ArrayList
         if (rpl_grupoMusica.size() == 0){//si el tamaño es 0 que imprima que no hay aun ningun musico en el ArrayList
             System.out.println("\nAun no hay musicos en el ArrayList rpl_grupoMusica");
